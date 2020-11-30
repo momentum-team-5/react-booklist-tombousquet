@@ -1,49 +1,36 @@
 import './App.css'
 import 'tachyons'
-import { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Register from './components/Register'
+import Login from './components/Login'
+import BookList from './components/BookList'
+import Nav from './components/Nav'
+import { useLocalStorage } from './hooks'
 
 function App () {
-  const [username, setUsername] = useState('')
-  const [userPassword, setUserPassword] = useState('')
-
-  function handleSubmit (e) {
-    e.preventDefault()
-  }
+  const [auth, setAuth] = useLocalStorage('book_auth', null)
 
   return (
-    <div className='app'>
-      <h1>Book List</h1>
-      <div className='login'>
-        <form onSubmit={handleSubmit}>
-          <label className='user'>
-            Username {' '}
-            <input
-              type='username'
-              name={'user-' + username}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-        </form>
-        <form className='ma2'>
-          <label className='password'>
-            Password {' '}
-            <input
-              type='password'
-              name={'password-' + userPassword}
-              value={userPassword}
-              onChange={(e) => setUserPassword(e.target.value)}
-            />
-          </label>
-        </form>
-        <button
-          className='login-button ma2'
-          type='submit'
-        >
-          Login
-        </button>
+    <Router>
+      <div className='account'>
+        {auth && (
+          <div className='ma2'>
+            <span>Logged in as {auth.username}</span> | <button onClick={() => setAuth(null)}>Log out</button>
+          </div>
+        )}
+        <Switch>
+          <Route path='/signup'>
+            <Register auth={auth} onRegister={setAuth} />
+          </Route>
+          <Route path='/login'>
+            <Login auth={auth} onLogin={setAuth} />
+          </Route>
+          <Route path='/'>
+            <BookList auth={auth} />
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   )
 }
 
