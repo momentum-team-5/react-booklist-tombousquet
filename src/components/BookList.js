@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import clsx from 'clsx'
@@ -13,7 +13,7 @@ export default function BookList ({ auth }) {
       .then(response => {
         setBooks(response.data.books)
       })
-  })
+  }, [auth])
 
   if (!auth) {
     return <Redirect to='/login' />
@@ -28,14 +28,18 @@ export default function BookList ({ auth }) {
       </div>
       {books.map(book => (
         <div
-          key={book._id} className={clsx('ma2 book', {
+          key={book._id} className={clsx('ma2 book flex', {
             reading: book.status === 'reading',
             toread: book.status === 'toread',
             read: book.status === 'read'
           })}
         >
-          <h2 className='ma2 underline'>{book.title || 'No Title'}</h2>
-          <p className='ma3 i'>Written by {book.authors}</p>
+          <h2 className='ma2 underline flex'>
+            <Link to={'/books/' + book._id}>
+              {book.title || 'No Title'}
+            </Link>
+          </h2>
+          <p className='ma3 i flex'>Written by {book.authors}</p>
         </div>
       ))}
     </div>

@@ -1,19 +1,12 @@
 .user {
   margin: 0 auto;
-  width: 450px;
-  height: 300px;
   border: solid black 5px;
   text-align: center;
   justify-content: center;
 }
 
-.account {
-  width: 600px;
-  justify-content: flex-end;
-}
 .book {
-  border: dotted gray 3px;
-  display: flex;
+  border: dotted white 3px;
 }
 
 .reading {

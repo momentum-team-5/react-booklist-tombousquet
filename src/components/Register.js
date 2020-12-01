@@ -29,9 +29,11 @@ export default function Register ({ auth, onRegister }) {
   }
 
   return (
-    <div className='Register user'>
-      <h1 className='f2 b'>Sign Up or <Link to='/login'>Log In</Link></h1>
-      {
+    <div>
+      <h1 className='ml3'>Welcome to BookTracker!</h1>
+      <div className='Register user center'>
+        <h1 className='f2 b'>Sign Up or <Link to='/login'>Log In</Link></h1>
+        {
         feedbackMsg &&
         (
           <div className={clsx(
@@ -46,33 +48,34 @@ export default function Register ({ auth, onRegister }) {
           </div>
         )
       }
-      <form onSubmit={handleSubmit}>
-        <div className='mv2'>
-          <label className='db b mv2' htmlFor='username'>Username</label>
-          <input
-            required
-            className='f5'
-            type='text'
-            id='username'
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-          />
-        </div>
-        <div className='mv2'>
-          <label className='db b mv2' htmlFor='password'>Password</label>
-          <input
-            required
-            className='f5'
-            type='password'
-            id='password'
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-          />
-        </div>
-        <div className='mt2 ph3'>
-          <button type='submit'>Sign Up</button>
-        </div>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div className='mv2'>
+            <label className='db b mv2' htmlFor='username'>Username</label>
+            <input
+              required
+              className='f5'
+              type='text'
+              id='username'
+              value={username}
+              onChange={event => setUsername(event.target.value)}
+            />
+          </div>
+          <div className='mv2'>
+            <label className='db b mv2' htmlFor='password'>Password</label>
+            <input
+              required
+              className='f5'
+              type='password'
+              id='password'
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+            />
+          </div>
+          <div className='mv4 ph3'>
+            <button type='submit'>Sign Up</button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

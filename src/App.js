@@ -1,9 +1,11 @@
 import './App.css'
 import 'tachyons'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Register from './components/Register'
 import Login from './components/Login'
 import BookList from './components/BookList'
+import BookDetail from './components/BookDetail'
+import AddBook from './components/AddBook'
 import Nav from './components/Nav'
 import { useLocalStorage } from './hooks'
 
@@ -12,13 +14,22 @@ function App () {
 
   return (
     <Router>
-      <div className='account'>
+      <div className='center mt4'>
         {auth && (
           <div className='ma2'>
             <span>Logged in as {auth.username}</span> | <button onClick={() => setAuth(null)}>Log out</button>
+            <h2 className='ma2 underline flex'>
+              <Link to='/add'>Add a book</Link>
+            </h2>
           </div>
         )}
         <Switch>
+          <Route path='/books/:id'>
+            <BookDetail auth={auth} />
+          </Route>
+          <Route path='/add'>
+            <AddBook auth={auth} />
+          </Route>
           <Route path='/signup'>
             <Register auth={auth} onRegister={setAuth} />
           </Route>
