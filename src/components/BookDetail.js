@@ -30,7 +30,7 @@ export default function BookDetail ({ auth }) {
     setEdit(true)
   }
 
-  const currentBook = book.notes
+  const notes = book.notes
 
   if (!auth) {
     return <Redirect to='/login' />
@@ -49,10 +49,12 @@ export default function BookDetail ({ auth }) {
       <h1>Expanded Info for <span className='underline'>{book.title}</span></h1>
       <h2>Authored by: {book.authors}</h2>
       <h2>Added to {book.status} at {book.updated}</h2>
-      <h2>Notes taken on <span className='underline'>{book.title}</span></h2>
+      <h2>Notes taken on
+        <span className='underline'>{book.title}</span>
+      </h2>
       <div>
-        {currentBook.map(note => (
-          <div key={book._id}>
+        {notes && notes.map((note, index) => (
+          <div key={index}>
             <h3 className='ma2'>{note.note}</h3>
             <p>On {note.page}</p>
           </div>

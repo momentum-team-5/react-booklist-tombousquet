@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import clsx from 'clsx'
 
-export default function AddBook ({ auth, onAdd }) {
+export default function AddBook ({ auth }) {
   const [title, setTitle] = useState('')
   const [authors, setAuthors] = useState('')
   const [status, setStatus] = useState('')
@@ -13,12 +13,11 @@ export default function AddBook ({ auth, onAdd }) {
     e.preventDefault()
     axios.post('https://books-api.glitch.me/api/books', {
       title: title,
-      authors: authors,
+      authors: authors.split(/\s*,\s*/),
       status: status
-    }, [auth])
+    }, { auth })
       .then(response => {
         setFeedbackMsg({ type: 'success', message: 'The book was added successfully.' })
-        onAdd({ title, authors, status })
         console.log(response)
       })
       .catch(error => {
