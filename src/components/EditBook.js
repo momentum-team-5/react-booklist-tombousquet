@@ -1,25 +1,38 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import clsx from 'clsx'
 
-export default function EditBook ({ auth, onEdit }) {
+export default function EditBook ({ auth }) {
+  const [book, setBook] = useState({})
   const { id } = useParams()
   const [title, setTitle] = useState('')
   const [authors, setAuthors] = useState('')
   const [status, setStatus] = useState('')
+  const [note, setNote] = useState('')
+  const [page, setPage] = useState('')
   const [feedbackMsg, setFeedbackMsg] = useState('')
+
+  useEffect(() => {
+    axios.get('https://books-api.glitch.me/api/books/' + id, {
+      auth: auth
+    })
+      .then(response => {
+        setBook(response.data.book)
+      })
+  }, [auth, id])
 
   function handleEdit (e) {
     e.preventDefault()
     axios.put('https://books-api.glitch.me/api/books/' + id, {
       title: title,
-      authors: authors,
-      status: status
-    }, [auth])
+      authors: authors.split(/\s*,\s*/),
+      status: status,
+      note: note,
+      page: page
+    }, { auth })
       .then(response => {
         setFeedbackMsg({ type: 'success', message: 'The book was edited successfully.' })
-        onEdit({ title, authors, status })
         console.log(response)
       })
       .catch(error => {
@@ -62,7 +75,7 @@ export default function EditBook ({ auth, onEdit }) {
               onChange={event => setTitle(event.target.value)}
               name='bookTitle'
               component='input'
-              placeholder='Book Title'
+              placeholder={book.title}
             />
           </div>
           <div className='mh2 mv2'>
@@ -75,7 +88,7 @@ export default function EditBook ({ auth, onEdit }) {
               onChange={event => setAuthors(event.target.value)}
               name='bookAuthors'
               component='input'
-              placeholder='Book Authors'
+              placeholder={book.authors}
             />
           </div>
           <div className='mh2 mv2'>
@@ -87,7 +100,7 @@ export default function EditBook ({ auth, onEdit }) {
               onChange={event => setStatus(event.target.value)}
               name='bookStatus'
             >
-              <option value='null'>Choose from below</option>
+              <option value='null'>Choose book status</option>
               <option value='toread'>To Read</option>
               <option value='reading'>Reading</option>
               <option value='read'>Read</option>

@@ -59,13 +59,13 @@ export default function BookDetail ({ auth }) {
       <h2>Authored by: {book.authors}</h2>
       <h2>Added to {book.status} at {book.updated}</h2>
       <h2>Notes taken on
-        <span className='underline'>{book.title}</span>
+        <span className='underline'> {book.title}</span>
       </h2>
       <div>
         {notes && notes.map((note, index) => (
           <div key={index}>
             <h3 className='ma2'>{note.note}</h3>
-            <p>On {note.page}</p>
+            <p>Page {note.page}</p>
           </div>
         ))}
       </div>
