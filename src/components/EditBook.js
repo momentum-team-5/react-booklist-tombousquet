@@ -1,24 +1,25 @@
 import { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import clsx from 'clsx'
 
-export default function AddBook ({ auth, onAdd }) {
+export default function EditBook ({ auth, onEdit }) {
+  const { id } = useParams()
   const [title, setTitle] = useState('')
   const [authors, setAuthors] = useState('')
   const [status, setStatus] = useState('')
   const [feedbackMsg, setFeedbackMsg] = useState('')
 
-  function handleSubmit (e) {
+  function handleEdit (e) {
     e.preventDefault()
-    axios.post('https://books-api.glitch.me/api/books', {
+    axios.put('https://books-api.glitch.me/api/books/' + id, {
       title: title,
       authors: authors,
       status: status
     }, [auth])
       .then(response => {
-        setFeedbackMsg({ type: 'success', message: 'The book was added successfully.' })
-        onAdd({ title, authors, status })
+        setFeedbackMsg({ type: 'success', message: 'The book was edited successfully.' })
+        onEdit({ title, authors, status })
         console.log(response)
       })
       .catch(error => {
@@ -33,7 +34,7 @@ export default function AddBook ({ auth, onAdd }) {
 
   return (
     <div>
-      <h1 className='ma2'>New Book Entry</h1>
+      <h1 className='ma2'>Edit Book Entry</h1>
       {
         feedbackMsg &&
         (
@@ -49,7 +50,7 @@ export default function AddBook ({ auth, onAdd }) {
           </div>
         )
       }
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleEdit}>
         <div>
           <div className='mh2 mv2'>
             <label className='mv2 b' htmlFor='title'>Title</label>

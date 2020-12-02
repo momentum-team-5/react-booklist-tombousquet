@@ -1,10 +1,11 @@
-import { Link, Redirect } from 'react-router-dom'
+import { Link, NavLink, Redirect, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import clsx from 'clsx'
 
 export default function BookList ({ auth }) {
   const [books, setBooks] = useState([])
+  const { status } = useParams()
 
   useEffect(() => {
     axios.get('https://books-api.glitch.me/api/books', {
@@ -18,15 +19,30 @@ export default function BookList ({ auth }) {
   if (!auth) {
     return <Redirect to='/login' />
   }
+
+  let booksByStatus = books
+  if (status) {
+    booksByStatus = books.filter(book => book.status === status)
+  }
+
   return (
     <div className='BookList'>
       <h1 className='mh2 mv3'>Book List</h1>
       <div className='key flex'>
-        <h3 className='reading ma2'>Reading</h3>
-        <h3 className='toread ma2'>To Read</h3>
-        <h3 className='read ma2'>Read</h3>
+        <h3 className='all ma2'>
+          <NavLink to='/' exact>All Books</NavLink>
+        </h3>
+        <h3 className='reading ma2'>
+          <NavLink to='/status/reading'>Reading</NavLink>
+        </h3>
+        <h3 className='toread ma2'>
+          <NavLink to='/status/toread'>To Read</NavLink>
+        </h3>
+        <h3 className='read ma2'>
+          <NavLink to='/status/read'>Read</NavLink>
+        </h3>
       </div>
-      {books.map(book => (
+      {booksByStatus.map(book => (
         <div
           key={book._id} className={clsx('ma2 book flex', {
             reading: book.status === 'reading',

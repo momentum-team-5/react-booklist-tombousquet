@@ -6,7 +6,7 @@ import Login from './components/Login'
 import BookList from './components/BookList'
 import BookDetail from './components/BookDetail'
 import AddBook from './components/AddBook'
-import Nav from './components/Nav'
+import EditBook from './components/EditBook'
 import { useLocalStorage } from './hooks'
 
 function App () {
@@ -24,8 +24,14 @@ function App () {
           </div>
         )}
         <Switch>
+          <Route path='/status/:status'>
+            <BookList auth={auth} />
+          </Route>
           <Route path='/books/:id'>
             <BookDetail auth={auth} />
+          </Route>
+          <Route path='/edit/:id'>
+            <EditBook auth={auth} />
           </Route>
           <Route path='/add'>
             <AddBook auth={auth} />

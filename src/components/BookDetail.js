@@ -6,18 +6,18 @@ export default function BookDetail ({ auth }) {
   const { id } = useParams()
   const [book, setBook] = useState({})
   const [deleted, setDeleted] = useState(false)
+  const [edit, setEdit] = useState(false)
 
   useEffect(() => {
-    axios.get('https://books-api.glitch.me/api/books/', {
+    axios.get('https://books-api.glitch.me/api/books/' + id, {
       auth: auth
     })
       .then(response => {
-        const books = response.data.books
-        setBook(books.find(book => book._id === id))
+        setBook(response.data.book)
       })
-  }, [auth])
+  }, [auth, id])
 
-  function deletePost () {
+  function deleteBook () {
     axios.delete('https://books-api.glitch.me/api/books/' + id, {
       auth: auth
     })
@@ -25,6 +25,12 @@ export default function BookDetail ({ auth }) {
         setDeleted(true)
       })
   }
+
+  function editBook () {
+    setEdit(true)
+  }
+
+  const currentBook = book.notes
 
   if (!auth) {
     return <Redirect to='/login' />
@@ -34,14 +40,27 @@ export default function BookDetail ({ auth }) {
     return <Redirect to='/' />
   }
 
+  if (edit) {
+    return <Redirect to={'/edit/' + book._id} />
+  }
+
   return (
     <div>
       <h1>Expanded Info for <span className='underline'>{book.title}</span></h1>
       <h2>Authored by: {book.authors}</h2>
       <h2>Added to {book.status} at {book.updated}</h2>
-      <h2>{book.notes}</h2>
+      <h2>Notes taken on <span className='underline'>{book.title}</span></h2>
       <div>
-        <button onClick={deletePost}>Delete this book</button>
+        {currentBook.map(note => (
+          <div key={book._id}>
+            <h3 className='ma2'>{note.note}</h3>
+            <p>On {note.page}</p>
+          </div>
+        ))}
+      </div>
+      <div>
+        <button onClick={editBook}>Edit this book</button>
+        <button onClick={deleteBook}>Delete this book</button>
       </div>
     </div>
 
