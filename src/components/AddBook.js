@@ -17,13 +17,21 @@ export default function AddBook ({ auth }) {
       status: status
     }, { auth })
       .then(response => {
-        setFeedbackMsg({ type: 'success', message: 'The book was added successfully.' })
+        setFeedbackMsg({ type: 'success', message: 'This book was added successfully.' })
         console.log(response)
       })
       .catch(error => {
         setFeedbackMsg({ type: 'error', message: 'The book information you entered is not valid' })
         console.log(error)
       })
+  }
+
+  if (feedbackMsg.type === 'success') {
+    return (
+      <div>
+        <Redirect exact to='/' />
+      </div>
+    )
   }
 
   if (!auth) {

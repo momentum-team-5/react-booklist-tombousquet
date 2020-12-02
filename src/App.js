@@ -7,6 +7,7 @@ import BookList from './components/BookList'
 import BookDetail from './components/BookDetail'
 import AddBook from './components/AddBook'
 import EditBook from './components/EditBook'
+import AddNote from './components/AddNote'
 import { useLocalStorage } from './hooks'
 
 function App () {
@@ -20,6 +21,9 @@ function App () {
             <span>Logged in as {auth.username}</span> | <button onClick={() => setAuth(null)}>Log out</button>
             <h2 className='ma2 underline flex'>
               <Link to='/add'>Add a book</Link>
+            </h2>
+            <h2 className='ma2 underline flex'>
+              <Link to='/'>Home</Link>
             </h2>
           </div>
         )}
@@ -35,6 +39,9 @@ function App () {
           </Route>
           <Route path='/add'>
             <AddBook auth={auth} />
+          </Route>
+          <Route path='/note/:id/add'>
+            <AddNote auth={auth} />
           </Route>
           <Route path='/signup'>
             <Register auth={auth} onRegister={setAuth} />

@@ -7,6 +7,7 @@ export default function BookDetail ({ auth }) {
   const [book, setBook] = useState({})
   const [deleted, setDeleted] = useState(false)
   const [edit, setEdit] = useState(false)
+  const [addNote, setAddNote] = useState(false)
 
   useEffect(() => {
     axios.get('https://books-api.glitch.me/api/books/' + id, {
@@ -30,6 +31,10 @@ export default function BookDetail ({ auth }) {
     setEdit(true)
   }
 
+  function newNote () {
+    setAddNote(true)
+  }
+
   const notes = book.notes
 
   if (!auth) {
@@ -42,6 +47,10 @@ export default function BookDetail ({ auth }) {
 
   if (edit) {
     return <Redirect to={'/edit/' + book._id} />
+  }
+
+  if (addNote) {
+    return <Redirect to={'/note/' + book._id + '/add'} />
   }
 
   return (
@@ -63,6 +72,7 @@ export default function BookDetail ({ auth }) {
       <div>
         <button onClick={editBook}>Edit this book</button>
         <button onClick={deleteBook}>Delete this book</button>
+        <button onClick={newNote}>Add a note to this book</button>
       </div>
     </div>
 
