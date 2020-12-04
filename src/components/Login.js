@@ -31,10 +31,10 @@ export default function Login ({ auth, onLogin }) {
   }
 
   return (
-    <div>
-      <h1 className='ml3'>Welcome to BookTracker!</h1>
-      <div className='Login user mh6 center'>
-        <h1 className='f2 b'>Log In or <Link to='/signup'>Sign Up</Link></h1>
+    <div className='green'>
+      <h1 className='ml4 white'>Welcome to BookTracker!</h1>
+      <div className='Login user mh6 center mt6 rose'>
+        <h1 className='f2 b white'>Log In or <Link to='/signup'>Sign Up</Link></h1>
         {
           feedbackMsg &&
           (
@@ -52,7 +52,7 @@ export default function Login ({ auth, onLogin }) {
         }
         <form onSubmit={handleSubmit}>
           <div className='mv2'>
-            <label className='db b mv2' htmlFor='username'>Username </label>
+            <label className='db b mv2 white' htmlFor='username'>Username </label>
             <input
               required
               className='f5'
@@ -63,7 +63,7 @@ export default function Login ({ auth, onLogin }) {
             />
           </div>
           <div className='mv2'>
-            <label className='db b mv2' htmlFor='password'>Password</label>
+            <label className='db b mv2 white' htmlFor='password'>Password</label>
             <input
               required
               className='f5'

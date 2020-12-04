@@ -39,7 +39,7 @@ export default function AddNote ({ auth }) {
 
   return (
     <div>
-      <h1 className='ma2'>New Note Entry</h1>
+      <h1 className='mh2 mv4'>New Note Entry</h1>
       {
         feedbackMsg &&
         (
@@ -55,11 +55,12 @@ export default function AddNote ({ auth }) {
           </div>
         )
       }
-      <form onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit}>
         <div>
-          <div className='mh2 mv2'>
-            <label className='mv2 b' htmlFor='title'>Note</label>
+          <div className='mh2 mv3'>
+            <label className='mv2  mh2 b' htmlFor='title'>Note</label>
             <input
+              className='mh3'
               required
               type='text'
               id='note'
@@ -70,8 +71,8 @@ export default function AddNote ({ auth }) {
               placeholder='Add note here'
             />
           </div>
-          <div className='mh2 mv2'>
-            <label className='mv2 b' htmlFor='authors'>Page #</label>
+          <div className='mh2 mv3'>
+            <label className='mv2  mh2 b' htmlFor='authors'>Page #</label>
             <input
               required
               type='number'
@@ -83,7 +84,7 @@ export default function AddNote ({ auth }) {
               placeholder='#'
             />
           </div>
-          <button className='mh2 mv2' type='submit'>Submit</button>
+          <button className='mh6 mv2' type='submit'>Submit</button>
         </div>
       </form>
     </div>

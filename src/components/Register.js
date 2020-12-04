@@ -29,10 +29,10 @@ export default function Register ({ auth, onRegister }) {
   }
 
   return (
-    <div>
-      <h1 className='ml3'>Welcome to BookTracker!</h1>
-      <div className='Register user center'>
-        <h1 className='f2 b'>Sign Up or <Link to='/login'>Log In</Link></h1>
+    <div className='green'>
+      <h1 className='ml4 white'>Welcome to BookTracker!</h1>
+      <div className='Login user mh6 center mt6 rose'>
+        <h1 className='f2 b white'>Sign Up or <Link to='/login'>Log In</Link></h1>
         {
         feedbackMsg &&
         (
@@ -50,7 +50,7 @@ export default function Register ({ auth, onRegister }) {
       }
         <form onSubmit={handleSubmit}>
           <div className='mv2'>
-            <label className='db b mv2' htmlFor='username'>Username</label>
+            <label className='db b mv2 white' htmlFor='username'>Username</label>
             <input
               required
               className='f5'
@@ -61,7 +61,7 @@ export default function Register ({ auth, onRegister }) {
             />
           </div>
           <div className='mv2'>
-            <label className='db b mv2' htmlFor='password'>Password</label>
+            <label className='db b mv2 white' htmlFor='password'>Password</label>
             <input
               required
               className='f5'

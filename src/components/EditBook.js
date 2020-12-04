@@ -9,8 +9,6 @@ export default function EditBook ({ auth }) {
   const [title, setTitle] = useState('')
   const [authors, setAuthors] = useState('')
   const [status, setStatus] = useState('')
-  const [note, setNote] = useState('')
-  const [page, setPage] = useState('')
   const [feedbackMsg, setFeedbackMsg] = useState('')
 
   useEffect(() => {
@@ -26,10 +24,8 @@ export default function EditBook ({ auth }) {
     e.preventDefault()
     axios.put('https://books-api.glitch.me/api/books/' + id, {
       title: title,
-      authors: authors.split(/\s*,\s*/),
-      status: status,
-      note: note,
-      page: page
+      authors: authors.split(/\s* ,\s*/),
+      status: status
     }, { auth })
       .then(response => {
         setFeedbackMsg({ type: 'success', message: 'The book was edited successfully.' })
@@ -39,6 +35,14 @@ export default function EditBook ({ auth }) {
         setFeedbackMsg({ type: 'error', message: 'The book information you entered is not valid' })
         console.log(error)
       })
+  }
+
+  if (feedbackMsg.type === 'success') {
+    return (
+      <div>
+        <Redirect to={'/books/' + id} />
+      </div>
+    )
   }
 
   if (!auth) {

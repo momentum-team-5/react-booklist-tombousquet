@@ -13,7 +13,7 @@ export default function AddBook ({ auth }) {
     e.preventDefault()
     axios.post('https://books-api.glitch.me/api/books', {
       title: title,
-      authors: authors.split(/\s*,\s*/),
+      authors: authors.split(/\s* ,\s*/),
       status: status
     }, { auth })
       .then(response => {
@@ -40,7 +40,7 @@ export default function AddBook ({ auth }) {
 
   return (
     <div>
-      <h1 className='ma2'>New Book Entry</h1>
+      <h1 className='mh2 mv4'>New Book Entry</h1>
       {
         feedbackMsg &&
         (
@@ -56,11 +56,12 @@ export default function AddBook ({ auth }) {
           </div>
         )
       }
-      <form onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit}>
         <div>
-          <div className='mh2 mv2'>
-            <label className='mv2 b' htmlFor='title'>Title</label>
+          <div className='mh2 mv3'>
+            <label className='mv2  mh2 b' htmlFor='title'>Title</label>
             <input
+              className='mh4'
               required
               type='text'
               id='title'
@@ -71,9 +72,10 @@ export default function AddBook ({ auth }) {
               placeholder='Book Title'
             />
           </div>
-          <div className='mh2 mv2'>
-            <label className='mv2 b' htmlFor='authors'>Authors</label>
+          <div className='mh2 mv3'>
+            <label className='mv2 b mh2' htmlFor='authors'>Authors</label>
             <input
+              className='mh1'
               required
               type='text'
               id='authors'
@@ -84,9 +86,10 @@ export default function AddBook ({ auth }) {
               placeholder='Book Authors'
             />
           </div>
-          <div className='mh2 mv2'>
-            <label className='mv2 b' htmlFor='status'>Status</label>
+          <div className='mh2 mv3'>
+            <label className='mv2 b mh2' htmlFor='status'>Status</label>
             <select
+              className='mh3'
               required
               id='status'
               value={status}
@@ -100,7 +103,7 @@ export default function AddBook ({ auth }) {
             </select>
 
           </div>
-          <button className='mh2 mv2' type='submit'>Submit</button>
+          <button className='ml6 mv2 ' type='submit'>Submit</button>
         </div>
       </form>
     </div>

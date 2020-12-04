@@ -15,18 +15,24 @@ function App () {
 
   return (
     <Router>
-      <div className='center mt4'>
-        {auth && (
-          <div className='ma2'>
-            <span>Logged in as {auth.username}</span> | <button onClick={() => setAuth(null)}>Log out</button>
-            <h2 className='ma2 underline flex'>
+      <div className=''>
+        <ul className=' ma1 pa0 flex'>
+          <li className='nav'>
+            <h2 className='ma2 underline'>
+              <Link className='black' to='/'>Home</Link>
+            </h2>
+          </li>
+          <li className='nav'>
+            <h2 className='mv2 mh2 underline black'>
               <Link to='/add'>Add a book</Link>
             </h2>
-            <h2 className='ma2 underline flex'>
-              <Link to='/'>Home</Link>
-            </h2>
-          </div>
-        )}
+          </li>
+          {auth && (
+            <li className='nav'>
+              <h2 className='ma2 ml2 logged'>Logged in as {auth.username} | <Link to='/login' className='nav' onClick={() => setAuth(null)}>Log out</Link></h2>
+            </li>
+          )}
+        </ul>
         <Switch>
           <Route path='/status/:status'>
             <BookList auth={auth} />

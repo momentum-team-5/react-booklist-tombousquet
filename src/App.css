@@ -10,21 +10,70 @@
 }
 
 .reading {
-  background-color: aqua;
+  background-color: #3a7ca5;
 }
 
 .toread {
-  background-color: gold;
+  background-color: #26532b;
 }
 
 .read {
-  background-color: lightcoral;
-}
-
-.key {
-  width: 300px;
+  background-color: #c97b84;
 }
 
 a.active {
   width: 100px;
+}
+
+.rose {
+  background-color: #c97b84;
+  color: #c97b84;
+}
+
+.black {
+  color: #272838;
+}
+
+.blue {
+  color: #3a7ca5;
+  background-color: #3a7ca5;
+}
+
+.gray {
+  color: #c7d6d5a1;
+}
+
+.green {
+  color: #26532b;
+  background-color: #26532b;
+}
+
+a:visited {
+  color: #c7d6d567;
+}
+
+.nav {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.black {
+  color: black;
+}
+
+.detail {
+  border: black 2px double;
+}
+
+.notes {
+  border: 2px black dashed;
+}
+
+.form {
+  border: black 2px solid;
+}
+
+.logged {
+  color: #c7d6d5de;
 }

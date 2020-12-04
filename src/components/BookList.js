@@ -27,18 +27,18 @@ export default function BookList ({ auth }) {
 
   return (
     <div className='BookList'>
-      <h1 className='mh2 mv3'>Book List</h1>
+      <h1 className='mh2 mv3 gray'>Book List</h1>
       <div className='key flex'>
-        <h3 className='all ma2'>
-          <NavLink to='/' exact>All Books</NavLink>
+        <h3 className='all ma2 black'>
+          <NavLink className='gray bg-black' to='/' exact>All Books</NavLink>
         </h3>
-        <h3 className='reading ma2'>
+        <h3 className='reading ma2 blue sort'>
           <NavLink to='/status/reading'>Reading</NavLink>
         </h3>
-        <h3 className='toread ma2'>
+        <h3 className='toread ma2 green sort'>
           <NavLink to='/status/toread'>To Read</NavLink>
         </h3>
-        <h3 className='read ma2'>
+        <h3 className='read ma2 rose sort'>
           <NavLink to='/status/read'>Read</NavLink>
         </h3>
       </div>
@@ -50,12 +50,12 @@ export default function BookList ({ auth }) {
             read: book.status === 'read'
           })}
         >
-          <h2 className='ma2 underline flex'>
-            <Link to={'/books/' + book._id}>
+          <h2 className='ma2 underline flex white'>
+            <Link className='white' to={'/books/' + book._id}>
               {book.title || 'No Title'}
             </Link>
           </h2>
-          <p className='ma3 i flex'>Written by {book.authors}</p>
+          <p className='ma3 i flex white'>Written by {book.authors}</p>
         </div>
       ))}
     </div>
